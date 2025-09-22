@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Alibaba Homepage Prototype</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    
+    #topbar {
+      background-color: #ff6a00;
+      color: white;
+      padding: 10px 20px;
+    }
+    #topbar a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+    #search-section {
+      background-color: white;
+      padding: 20px;
+    }
+    #quick-links a {
+      margin-right: 10px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #333;
+    }
+    .tile {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      height: 180px;
+    }
+    .tile img {
+      height: 80px;
+      width: 80px;
+      background-color: #eee;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+<<!-- Global Header -->
+<div class="container-fluid bg-light py-2 px-3 border-bottom">
+  <div class="row align-items-center justify-content-between">
+
+    <!-- Left Side: Logo + Delivery -->
+    <div class="col-md-6 d-flex align-items-center">
+      <img src="data:image/png;base64,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" alt="Alibaba Logo" height="70" class="me-3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROTu1DR_ABdfyqGzqdYCeuf5PjVylgnzOxLg&s" alt="BD Flag" height="20" class="me-2">
+      <span>Deliver to <strong>BD</strong></span>
+    </div>
+
+    <!-- Right Side: User Links -->
+    <div class="col-md-6 text-end">
+      <a href="#" class="me-3 text-dark text-decoration-none">Messages</a>
+      <a href="#" class="me-3 text-dark text-decoration-none">Orders</a>
+      <a href="#" class="me-3 text-dark text-decoration-none">Cart</a>
+      <a href="#" class="me-3 text-dark text-decoration-none">Account</a>
+      <a href="#" class="text-dark text-decoration-none">Login</a>
+    </div>
+
+  </div>
+</div>
+
+  <!-- Top Navigation -->
+  <div id="topbar" class="d-flex justify-content-between align-items-center">
+    <div>
+      <a href="#">All categories</a>
+      <a href="#">Featured selections</a>
+      <a href="#">Order protections</a>
+      <a href="#">Sourcing agent</a>
+      <a href="#">Buyer Central</a>
+      <a href="#">Help Center</a>
+      <a href="#">Become a supplier</a>
+    </div>
+    <div>
+      <span>BD</span> |
+      <span>EN</span> |
+      <a href="#">Sign In</a>
+    </div>
+  </div>
+
+ <!-- Search Section -->
+<div class="container-fluid py-4" style="background: linear-gradient(to right, #ff6a00, #ffc107);">
+  <div class="row mb-3">
+    <div class="col-md-2 text-center fw-bold text-white">Products</div>
+    <div class="col-md-2 text-center text-white">Manufacturers</div>
+    <div class="col-md-2 text-center text-white">Worldwide</div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-md-10">
+      <input type="text" class="form-control" placeholder="Search products..." style="background-color: white;">
+    </div>
+    <div class="col-md-2">
+      <button class="btn w-100" style="background-color: #ff6a00; color: white;">Search</button>
+    </div>
+  </div>
+  <div id="quick-links" class="mt-3 text-white">
+    <a href="#" class="me-3 text-white text-decoration-none">iphones 15 pro max</a>
+    <a href="#" class="me-3 text-white text-decoration-none">labubu</a>
+    <a href="#" class="me-3 text-white text-decoration-none">watch</a>
+    <a href="#" class="me-3 text-white text-decoration-none">women's intimates</a>
+    <a href="#" class="me-3 text-white text-decoration-none">electric bike</a>
+    <a href="#" class="me-3 text-white text-decoration-none">mobile phones</a>
+    <a href="#" class="me-3 text-white text-decoration-none">smart watch</a>
+    <a href="#" class="text-white text-decoration-none">more...</a>
+  </div>
+</div>
+
+<!-- Welcome Section -->
+<div class="container mt-4">
+  <h4 class="fw-bold">Welcome to Alibaba.com</h4>
+  <div class="row mt-3">
+    
+    <!-- Category Menu -->
+    <div class="col-md-3">
+      <div class="list-group" style="height: 100%;">
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Categories for you</span><span>&rarr;</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Apparel & Accessories</span><span>&rarr;</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Consumer Electronics</span><span>&rarr;</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Sports & Entertainment</span><span>&rarr;</span>
+        </div>
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Jewelry, Eyewear & Watches</span><span>&rarr;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Tiles -->
+    <div class="col-md-9">
+      <div class="row g-3" style="min-height: 360px;">
+        <div class="col-md-3 d-flex align-items-stretch">
+          <div class="tile w-100 d-flex flex-column justify-content-center align-items-center">
+            <img src="https://sc01.alicdn.com/kf/H460b614033394b0e86b48ad3e250c974S.jpg" alt="Electric Motorcycles" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="mt-2 fw-bold text-center">Electric Motorcycles</div>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-stretch">
+          <div class="tile w-100 d-flex flex-column justify-content-center align-items-center">
+            <img src="https://sc01.alicdn.com/kf/Hc8d21612ea5f442a8207a772f358be71o.jpg" alt="Laptops" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="mt-2 fw-bold text-center">Laptops</div>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-stretch">
+          <div class="tile w-100 d-flex flex-column justify-content-center align-items-center">
+            <img src="https://sc01.alicdn.com/kf/Hb8d481a0ec2e4779be411159a64d5f3bg.png" alt="Watch" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="mt-2 fw-bold text-center">Watch</div>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-stretch">
+          <div class="tile w-100 d-flex flex-column justify-content-center align-items-center">
+            <img src="https://sc01.alicdn.com/kf/Hb54c59a50b8b4e5d8c10336d2a04faccw.jpg" alt="Dispatch in 7 days" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="mt-2 fw-bold text-center">Dispatch in 7 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- closes Welcome Section container -->
+
+<!-- Fast Customization Section -->
+<div class="container-fluid py-5" style="background-color: #f5f5f5;">
+  <div class="container">
+
+    <!-- Purple Banner -->
+    <div class="p-4 rounded mb-4" style="background-color: #6f42c1; color: white;">
+      <h4 class="fw-bold mb-2">Fast customization</h4>
+      <p class="mb-3">Low MOQ · 1–4 day dispatch · True to design</p>
+      <button class="btn btn-light fw-bold">Explore now</button>
+    </div>
+
+    <!-- Product Tiles -->
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+          <img src="https://s.alicdn.com/@sc04/kf/H3043b132b52e4bb49ed3fc27f6348f52b.jpg" alt="Logo/graphic design" style="height: 100px; width: 100px; object-fit: cover;">
+          <div class="fw-bold mt-2">Logo/graphic design</div>
+          <div class="text-muted">BDT 160.77 · MOQ 70</div>
+          <span class="badge bg-warning text-dark mt-2">Super</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+          <img src="https://s.alicdn.com/@sc04/kf/Hb78fb96f4a2b4ebfac43a2478d0c7bb8b.png" alt="Name plate" style="height: 100px; width: 100px; object-fit: cover;">
+          <div class="fw-bold mt-2">Name plate</div>
+          <div class="text-muted">BDT 32,284.71 · MOQ 1</div>
+          <span class="badge bg-warning text-dark mt-2">Super</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+          <img src="https://s.alicdn.com/@sc04/kf/H0a62b54943cb4136b63a6bd4539956243.jpg" alt="Packaging (white box)" style="height: 100px; width: 100px; object-fit: cover;">
+          <div class="fw-bold mt-2">Packaging (white box)</div>
+          <div class="text-muted">BDT 18.62 · MOQ 1</div>
+          <span class="badge bg-warning text-dark mt-2">Super</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+          <img src="https://s.alicdn.com/@sc04/kf/Hc39bb5bf7c9647b982630ef289eff7d8A.jpg" alt="Packaging (blue device)" style="height: 100px; width: 100px; object-fit: cover;">
+          <div class="fw-bold mt-2">Packaging (blue device)</div>
+          <div class="text-muted">BDT 18.62 · MOQ 1</div>
+          <span class="badge bg-warning text-dark mt-2">Super</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Top Ranking & New Arrivals Section -->
+<div class="container mt-5">
+  <div class="row">
+    
+    <!-- Top Ranking List -->
+    <div class="col-md-3">
+      <h5 class="fw-bold mb-3">Top Ranking</h5>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Pigment <span class="badge bg-danger">Hot selling</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Diesel Generators <span class="badge bg-danger">Hot selling</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Plants Oil <span class="badge bg-danger">Hot selling</span>
+        </li>
+         <li class="list-group-item d-flex justify-content-between align-items-center">
+          stage light <span class="badge bg-danger">Hot selling</span>
+        </li>
+         <li class="list-group-item d-flex justify-content-between align-items-center">
+          earphones <span class="badge bg-danger">Hot selling</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- New Arrivals Grid -->
+    <div class="col-md-9">
+      <h5 class="fw-bold mb-3">New Arrivals</h5>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+            <img src="https://s.alicdn.com/@sc04/kf/H7cfd7e89a3d44dc4a543c23af87581819.png" alt="Dashboard Cluster" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="fw-bold mt-2">Dashboard Cluster</div>
+            <div class="text-muted">BDT 48,718.08 · MOQ 100</div>
+            <span class="badge bg-warning text-dark mt-2">Super</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+            <img src="https://s.alicdn.com/@sc04/kf/H60a2d288a5c3408ca9e72a4210958542S.jpg" alt="Tail Light" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="fw-bold mt-2">Tail Light</div>
+            <div class="text-muted">BDT 71,859.17 · MOQ 100</div>
+            <span class="badge bg-warning text-dark mt-2 me-1">Super</span>
+            <span class="badge bg-info text-dark">Listed in last 60 days</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+            <img src="https://s.alicdn.com/@sc04/kf/H6640e284216b490baffeaa51f7666cc1F.png" alt="Motorcycle Part" style="height: 100px; width: 100px; object-fit: cover;">
+            <div class="fw-bold mt-2">Motorcycle Part</div>
+            <div class="text-muted">BDT 24,359.04 · MOQ 100</div>
+            <span class="badge bg-warning text-dark mt-2">Super</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Combined Product Listings Section -->
+<div class="container mt-5">
+  
+  <!-- Popular Products -->
+  <h5 class="fw-bold mb-3">Popular Products</h5>
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/Hd7086c160f2c484ca865f06df7a7ab15i.jpg_480x480.jpg" alt="Chunky Bracelet" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Women Personalized Chunky...</div>
+        <div class="text-muted">BDT 198.53–237.51 · 1 piece</div>
+        <small class="text-success">982 sold</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H54a025af15684b5d82a474cd170066242.jpg_480x480.jpg" alt="Steel Bracelet" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Stainless Steel Double Layer...</div>
+        <div class="text-muted">BDT 80.39–103.53 · 1 piece</div>
+        <small class="text-success">2,013 sold</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H84e8fe651ace47b689aa470db39247baG.jpg_480x480.jpg" alt="Swan Earrings" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">2024 New Little Swan Crys...</div>
+        <div class="text-muted">BDT 31.67 · 2 pairs</div>
+        <small class="text-success">2,013 sold</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H0763a61283aa4f25aca8352d28b5a701b.png_480x480.jpg" alt="Sea Shipping" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Sea Shipping Freight Forwarder...</div>
+        <div class="text-muted">BDT 121.80–231.42 · 10–1000 kg</div>
+        <small class="text-success">63 sold</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H30a55224d521420faf6552fccdf4ff18T.jpg_480x480.jpg" alt="Personalized Item" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">2025 Wholesale Personalized...</div>
+        <div class="text-muted">BDT 32.89 · MOQ 2</div>
+        <small class="text-success">287 sold · Ships from China</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H63848ad13f4d4b2589f775bdd0631406S.png_480x480.jpg" alt="Home Essentials" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Home Essential Gl...</div>
+        <div class="text-muted">BDT 182.70 · MOQ 2</div>
+        <small class="text-success">2,211 sold · Ships from China</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H1e9d0524a7d74a4a9d2ab6ba566c8a7eV.jpg_480x480.jpg" alt="Men Slippers" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Hot Sale Sport Customized...</div>
+        <div class="text-muted">BDT 35.26–88.92 · MOQ 2</div>
+        <small class="text-success">2,879 sold · Ships from China</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="bg-white rounded shadow-sm p-3 text-center h-100">
+        <img src="https://s.alicdn.com/@sc04/kf/H0ba04860b9494f80abe3f728b3bbce291.png_480x480.jpg" alt="Luxury Case" style="height: 100px; width: 100px; object-fit: cover;">
+        <div class="fw-bold mt-2">Custom Logo Luxury C...</div>
+        <div class="text-muted">BDT 115.71 · MOQ 2</div>
+        <span class="badge bg-success text-white mt-2">Verified</span>
+        <small class="text-success d-block">1,153 sold · Ships from China</small>
+      </div>
+    </div>
+  </div>
+
+  
+    
+  </div>
+
+</div>
+
+</div>
